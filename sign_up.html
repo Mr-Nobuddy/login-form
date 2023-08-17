@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800&display=swap');
+        html{
+            height: 100%;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            background: #172031;
+        }
+        *{
+            font-family: 'Outfit', sans-serif;
+        }
+        .sign-box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            padding: 40px;
+            padding-top: 70px;
+            transform: translate(-50%,-50%);
+            background: rgba(0,0,0,0.5);
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        .sign-box h2{
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+        .sign-box .user-box{
+            position: relative;
+        }
+        .sign-box .user-box input{
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+        .sign-box .user-box label{
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+        }
+        .sign-box .user-box input:focus~label,
+        .sign-box .user-box input:valid~label{
+            top: -20px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+        .forgot_pass{
+            font-size: 12px;
+            color: #5b6b8b;
+            float: right;
+        }
+
+        .glow-on-hover {
+            width: 120px;
+            height: 50px;
+            font-size: 17px;
+            letter-spacing: 2px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:before {
+            content: '';
+            background: linear-gradient(45deg, #03e9f4, #03e9f4, #03e9f4, #03e9f4, #03e9f4, #03e9f4, #03e9f4, #03e9f4, #03e9f4);
+            position: absolute;
+            top: -2px;
+            left:-2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:active {
+            color: #000
+        }
+
+        .glow-on-hover:active:after {
+            background: transparent;
+        }
+
+        .glow-on-hover:hover:before {
+            opacity: 1;
+        }
+
+        .glow-on-hover:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        .rs-btn{
+          margin-top: 10px;
+          margin-left: 8px;
+        }
+        .s-btn{
+          margin-top: 10px;
+        }
+        .error{
+          color: red;
+          padding-bottom: 6px; 
+        } 
+        .log-btn{
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+          outline: none;
+          border: 0;
+          background: transparent;
+          width: 13rem;
+          height: auto;
+          margin-bottom: 20px;
+        }
+        .log-btn .circle{
+          transition: all 0.45s;
+          transition-timing-function: cubic-bezier(0.65,0,0.076,1);
+          position: relative;
+          display: block;
+          margin: 0;
+          width: 3rem;
+          height: 3rem;
+          background: #1a99fd;
+          border-radius: 1.625rem;
+        }
+        .log-btn .arrow_icon{
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          background: #fff;
+          transition: all 0.45s;
+          transition-timing-function: cubic-bezier(0.65,0,0.076,1);
+          left: 0.625rem;
+          width: 1.125rem;
+          height: 0.125rem;
+          background: none;
+        }
+        .log-btn .arrow_icon::before{
+          position: absolute;
+          content: "";
+          top: -0.25rem;
+          right: 0.0625rem;
+          width: 0.625rem;
+          height: 0.625rem;
+          border-top: 0.125rem solid #fff;
+          border-right: 0.125rem solid #fff;
+          transform: rotate(45deg);
+        }
+        .log-btn .button_text{
+          transition: all 0.45s;
+          transition-timing-function: cubic-bezier(0.65, 0, 0.076, 1);
+          position: absolute;
+          inset: 0;
+          padding: 0.75rem 0;
+          margin: 0 0 0 1.85rem;
+          color: #fff;
+          text-transform: uppercase;
+          font-size: 1rem;
+          line-height: 1.5;
+          letter-spacing: 1px;
+        }
+        .log-btn:hover .circle{
+          width: 100%;
+        }
+        .log-btn:hover .arrow_icon{
+          background: #fff;
+          transform: translate(1rem,0);
+        }
+        .login{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-top: 15px;
+        }
+        .final{
+            color: #fff;
+          margin: 10px;
+          padding-top: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .outer{
+            margin-top: 650px;
+        }
+    </style>
+    <script>
+        function printError(eleid,msg){
+          document.getElementById(eleid).innerHTML = msg;
+        }
+        function valid(){
+            name = document.f1.name.value;
+            if(name == ""){
+              printError('namerr','enter your full name')
+            }
+            if(name != ""){
+                printError('namerr',"");
+            }
+            passerr = mailerr = agerr = rpasserr = true;
+            var pass = document.f1.pswd.value;
+            var rpass = document.f1.rpswd.value;
+            
+            var regex1 = /[A-Z][A-Z]/;
+            var regex2 = /[a-z][a-z]/;
+            var regex3 = /[!-@]/;
+            if(pass != ""){
+                printError('passerr',"");
+                if(pass.search(regex1) == -1){
+                  // alert("add capital letters to the password");
+                  printError('passerr','password contain 2 capital letters')
+              }
+              if(pass.search(regex2) == -1){
+                  // alert("add small letters to your password");
+                  printError('passerr','password must contain 2 small letters')
+              }
+              if(pass.search(regex3) == -1){
+                  // alert("add special characters to your password");
+                  printError("passerr",'password must contain special characters')
+              }
+            }
+            else{
+              printError('passerr','Please choose a password')
+            }
+            // if(regex.test(pass)){
+            //     alert("add 1 special character in your password");
+            // }
+            if(pass != rpass){
+                printError('rpasserr','password must be same');
+            }
+            else{
+                printError('rpasserr','');
+            }
+
+            var mail = document.f1.email.value;
+            if(mail == ""){
+              printError('mailerr','Please enter your email')
+            }
+            if(mail!=""){
+                printError('mailerr','');
+            }
+            if(!mail.includes('@') && !mail.includes('.com') && mail.includes('.co.in') && mail.includes('.in')){
+                // alert("invalid email");
+                printError('mailerr','invalid email')
+            }
+            if(document.f1.add.value == ""){
+                printError('adderr','Enter your address')
+            }else{
+                printError('adderr','');
+            }
+            if(document.f1.age.value == 0){
+              printError('agerr','Please enter you age')
+            }
+            if(document.f1.age.value < 18){
+                // alert("age must 18 or more");
+                printError('agerr','age must be 18 or more')
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="sign-box">
+        <h2>Sign-up</h2>
+        <form name="f1">
+            <div class="user-box">
+                <input type="text" name="name" id="name" required>
+                <label>Enter name: </label>
+                <div class="error" id="namerr"></div>
+            </div>
+
+            <div class="user-box">
+                <input type="text" name="pswd" id="pswd" required>
+                <label>Enter Password: </label>
+                <div class="error" id="passerr"></div>
+            </div>
+
+            <div class="user-box">
+                <input type="text" id="rpwd" name="rpswd" required>
+                <label>Retype Password: </label>
+                <div class="error" id="rpasserr"></div>
+            </div>
+
+            <div class="user-box">
+                <input type="text" id="email" name="email" required>
+                <label>Email address: </label>
+                <div class="error" id="mailerr"></div>
+            </div>
+
+            <div class="user-box">
+                <input type="text" id="add" name="add" required>
+                <label>Address: </label>
+                <div class="error" id="adderr"></div>
+            </div>
+
+            <div class="user-box">
+                <input type="text" id="age" name="age" required>
+                <label>Age: </label>
+                <div class="error" id="ageerr"></div>
+            </div>
+            <button type="button" class="s-btn st-btn glow-on-hover" onclick="valid()">Submit</button>
+            <button type="reset" class="rs-btn st-btn glow-on-hover">Clear</button>
+        </form>
+    </div>
+    <div class="outer">
+        <div class="final">If you already have an account</div>
+            <div class="login">
+                <a href="login.html" target="_blank">
+                <button class="log-btn">
+                    <span class="circle" aria-hidden="true">
+                    <span class="arrow_icon"></span>
+                    </span>
+                    <span class="button_text">Login Here</span>
+                </button>
+                </a>
+            </div>
+    </div>
+</body>
+</html>
